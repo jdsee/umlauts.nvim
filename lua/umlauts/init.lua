@@ -18,7 +18,7 @@ end
 
 M.disable_umlaut_mappings = function()
   for lhs, _ in pairs(mappings) do
-    pcall(function() vim.keymap.del("i", lhs) end)
+    pcall(vim.keymap.del, "i", lhs)
   end
 end
 
