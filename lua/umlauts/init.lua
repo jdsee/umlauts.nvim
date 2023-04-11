@@ -23,10 +23,10 @@ M.disable_umlaut_mappings = function()
 end
 
 M.setup = function(opts)
-  local autocommands = require "umlauts.autocommands"
+  local autocmds = require "umlauts.autocmds"
   local defaults = require "umlauts.defaults"
   local extended_opts = vim.tbl_deep_extend('force', opts, defaults)
-  autocommands.setup(extended_opts)
+  autocmds.setup(extended_opts)
 end
 
 return M

@@ -1,7 +1,7 @@
 local defaults = require "umlauts.defaults"
 local tu = require "tests.util"
 
-describe("umlauts.autocommands", function()
+describe("umlauts.autocmds", function()
 
   before_each(function()
     pcall(vim.api.nvim_clear_autocmds, { group = "UmlautMappings" })
@@ -14,15 +14,15 @@ describe("umlauts.autocommands", function()
   end)
 
   it("can be required", function()
-    require("umlauts.autocommands")
+    require("umlauts.autocmds")
   end)
 
   it("can be setup", function()
-    require("umlauts.autocommands").setup(defaults)
+    require("umlauts.autocmds").setup(defaults)
   end)
 
   it("creates autocommand for all configured patterns", function()
-    require("umlauts.autocommands").setup(defaults)
+    require("umlauts.autocmds").setup(defaults)
 
     local actual = vim.api.nvim_get_autocmds {
       group   = "UmlautMappings",
@@ -35,7 +35,7 @@ describe("umlauts.autocommands", function()
 
   it("creates autocommand that disables mapping if spelllang is not set to german", function()
     -- TODO: This test is no testing anything yet. The autocommand didn't run.
-    require("umlauts.autocommands").setup { enable = true, pattern = "*" }
+    require("umlauts.autocmds").setup { enable = true, pattern = "*" }
 
     vim.o.spelllang = "en_us"
 
@@ -49,7 +49,7 @@ describe("umlauts.autocommands", function()
   end)
 
   it("can be disabled explicitly", function()
-    require("umlauts.autocommands").setup { enabled = false }
+    require("umlauts.autocmds").setup { enabled = false }
 
     local actual = vim.api.nvim_get_autocmds { group = "UmlautMappings" }
 
@@ -57,7 +57,7 @@ describe("umlauts.autocommands", function()
   end)
 
   it("is disabled implictly when pattern is nil", function()
-    require("umlauts.autocommands").setup { enabled = true }
+    require("umlauts.autocmds").setup { enabled = true }
 
     local actual = vim.api.nvim_get_autocmds { group = "UmlautMappings" }
 
@@ -65,7 +65,7 @@ describe("umlauts.autocommands", function()
   end)
 
   it("is disabled implictly when pattern is empty", function()
-    require("umlauts.autocommands").setup { enabled = true, pattern = "" }
+    require("umlauts.autocmds").setup { enabled = true, pattern = "" }
 
     local actual = vim.api.nvim_get_autocmds { group = "UmlautMappings" }
 
