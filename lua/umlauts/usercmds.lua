@@ -12,7 +12,10 @@ M.setup = function()
     umlauts.disable_umlaut_mappings,
     { desc = "Disables insert mappings that translate spelled out german umlauts to the actual letters." })
 
-  -- TODO: UmalutsToggle
+  vim.api.nvim_create_user_command(
+    "UmlautsToggle",
+    umlauts.toggle_umlaut_mappings,
+    { desc = "Toggles insert mappings that translate spelled out german umlauts to the actual letters." })
 end
 
 return M

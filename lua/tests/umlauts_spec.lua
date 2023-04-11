@@ -1,4 +1,3 @@
-local defaults = require "umlauts.defaults"
 local tu = require "tests.util"
 
 describe("umlauts.nvim", function()
@@ -14,6 +13,10 @@ describe("umlauts.nvim", function()
 
   it("can be required", function()
     require("umlauts")
+  end)
+
+  it("can be setup", function()
+    require("umlauts").setup()
   end)
 
   it("can map insert mappings when enabled", function()
@@ -43,19 +46,41 @@ describe("umlauts.nvim", function()
     assert.is_nil(tu.find_buf_keymap("i", "ue"))
   end)
 
-  it("can enable multiple times without crashing", function()
+  it("can be enabled multiple times without crashing", function()
     local umlauts = require("umlauts")
+
     umlauts.enable_umlaut_mappings()
     umlauts.enable_umlaut_mappings()
   end)
 
-  it("can disable multiple times without crashing", function()
+  it("can be disabled multiple times without crashing", function()
     local umlauts = require("umlauts")
+
     umlauts.disable_umlaut_mappings()
     umlauts.disable_umlaut_mappings()
   end)
 
-  it("can be setup", function()
-    require("umlauts").setup(defaults)
+  it("enables umlaut mappings when toggled once", function()
+    local umlauts = require("umlauts").setup()
+
+    umlauts.toggle_umlaut_mappings()
+
+    assert.are.same("ä", tu.find_buf_keymap("i", "ae").rhs)
   end)
+
+  it("disables umlaut mappings when toggled twice", function()
+    local umlauts = require("umlauts").setup()
+
+    umlauts.toggle_umlaut_mappings()
+    umlauts.toggle_umlaut_mappings()
+
+    assert.is_nil(tu.find_buf_keymap("i", "ae"))
+  end)
+
+  it("should be disabled by default", function()
+    require("umlauts").setup()
+
+    assert.is_nil(tu.find_buf_keymap("i", "ae"))
+  end)
+
 end)

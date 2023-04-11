@@ -9,7 +9,6 @@ local function is_spelllang_set(term)
   return false
 end
 
-
 M.setup = function(opts)
   if not opts.enabled
       or opts.pattern == nil

@@ -20,4 +20,10 @@ describe("umlauts.nvim", function()
     assert.is.True(vim.fn.exists(':UmlautsDisable') > 0)
   end)
 
+  it("sets user commands for toggling umlaut mappings", function()
+    require("umlauts.usercmds").setup()
+
+    assert.is.True(vim.fn.exists(':UmlautsToggle') > 0)
+  end)
+
 end)
