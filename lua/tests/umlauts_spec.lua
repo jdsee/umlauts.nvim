@@ -1,13 +1,8 @@
-local function find_key_map(mode, lhs)
-  local keymaps = vim.api.nvim_get_keymap(mode)
-  for _, keymap in ipairs(keymaps) do
-    if keymap.lhs == lhs then
-      return keymap
-    end
-  end
-end
+local defaults = require "umlauts.defaults"
+local tu = require "tests.util"
 
 describe("umlauts", function()
+
   before_each(function()
     pcall(vim.keymap.del, "i", "Ae")
     pcall(vim.keymap.del, "i", "Oe")
@@ -26,12 +21,12 @@ describe("umlauts", function()
 
     umlauts.enable_umlaut_mappings()
 
-    assert.are.same("Ä", find_key_map("i", "Ae").rhs)
-    assert.are.same("Ö", find_key_map("i", "Oe").rhs)
-    assert.are.same("Ü", find_key_map("i", "Ue").rhs)
-    assert.are.same("ä", find_key_map("i", "ae").rhs)
-    assert.are.same("ö", find_key_map("i", "oe").rhs)
-    assert.are.same("ü", find_key_map("i", "ue").rhs)
+    assert.are.same("Ä", tu.find_keymap("i", "Ae").rhs)
+    assert.are.same("Ö", tu.find_keymap("i", "Oe").rhs)
+    assert.are.same("Ü", tu.find_keymap("i", "Ue").rhs)
+    assert.are.same("ä", tu.find_keymap("i", "ae").rhs)
+    assert.are.same("ö", tu.find_keymap("i", "oe").rhs)
+    assert.are.same("ü", tu.find_keymap("i", "ue").rhs)
   end)
 
   it("removes insert mappings when disabled", function()
@@ -40,12 +35,12 @@ describe("umlauts", function()
 
     umlauts.disable_umlaut_mappings()
 
-    assert.is_nil(find_key_map("i", "Ae"))
-    assert.is_nil(find_key_map("i", "Oe"))
-    assert.is_nil(find_key_map("i", "Ue"))
-    assert.is_nil(find_key_map("i", "ae"))
-    assert.is_nil(find_key_map("i", "oe"))
-    assert.is_nil(find_key_map("i", "ue"))
+    assert.is_nil(tu.find_keymap("i", "Ae"))
+    assert.is_nil(tu.find_keymap("i", "Oe"))
+    assert.is_nil(tu.find_keymap("i", "Ue"))
+    assert.is_nil(tu.find_keymap("i", "ae"))
+    assert.is_nil(tu.find_keymap("i", "oe"))
+    assert.is_nil(tu.find_keymap("i", "ue"))
   end)
 
   it("can enable multiple times without crashing", function()
@@ -58,5 +53,9 @@ describe("umlauts", function()
     local umlauts = require("umlauts")
     umlauts.disable_umlaut_mappings()
     umlauts.disable_umlaut_mappings()
+  end)
+
+  it("can be setup", function()
+    require("umlauts").setup(defaults)
   end)
 end)
