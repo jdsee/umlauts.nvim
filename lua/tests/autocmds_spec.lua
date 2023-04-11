@@ -39,13 +39,13 @@ describe("umlauts.autocmds", function()
 
     vim.o.spelllang = "en_us"
 
-    assert.is_nil(tu.find_keymap("i", "Ae"))
-    assert.is_nil(tu.find_keymap("i", "Oe"))
-    assert.is_nil(tu.find_keymap("i", "Ue"))
-    assert.is_nil(tu.find_keymap("i", "ae"))
-    assert.is_nil(tu.find_keymap("i", "oe"))
-    assert.is_nil(tu.find_keymap("i", "ue"))
-    assert.is_nil(tu.find_keymap("i", "sz"))
+    assert.is_nil(tu.find_buf_keymap("i", "Ae"))
+    assert.is_nil(tu.find_buf_keymap("i", "Oe"))
+    assert.is_nil(tu.find_buf_keymap("i", "Ue"))
+    assert.is_nil(tu.find_buf_keymap("i", "ae"))
+    assert.is_nil(tu.find_buf_keymap("i", "oe"))
+    assert.is_nil(tu.find_buf_keymap("i", "ue"))
+    assert.is_nil(tu.find_buf_keymap("i", "sz"))
   end)
 
   it("can be disabled explicitly", function()

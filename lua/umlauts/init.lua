@@ -12,13 +12,13 @@ local mappings = {
 
 M.enable_umlaut_mappings = function()
   for lhs, rhs in pairs(mappings) do
-    vim.keymap.set("i", lhs, rhs)
+    vim.keymap.set("i", lhs, rhs, { buffer = true })
   end
 end
 
 M.disable_umlaut_mappings = function()
   for lhs, _ in pairs(mappings) do
-    pcall(vim.keymap.del, "i", lhs)
+    pcall(vim.keymap.del, "i", lhs, { buffer = true })
   end
 end
 

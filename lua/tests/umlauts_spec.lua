@@ -1,7 +1,7 @@
 local defaults = require "umlauts.defaults"
 local tu = require "tests.util"
 
-describe("umlauts", function()
+describe("umlauts.nvim", function()
 
   before_each(function()
     pcall(vim.keymap.del, "i", "Ae")
@@ -16,17 +16,17 @@ describe("umlauts", function()
     require("umlauts")
   end)
 
-  it("maps insert mappings when enabled", function()
+  it("can map insert mappings when enabled", function()
     local umlauts = require("umlauts")
 
     umlauts.enable_umlaut_mappings()
 
-    assert.are.same("Ä", tu.find_keymap("i", "Ae").rhs)
-    assert.are.same("Ö", tu.find_keymap("i", "Oe").rhs)
-    assert.are.same("Ü", tu.find_keymap("i", "Ue").rhs)
-    assert.are.same("ä", tu.find_keymap("i", "ae").rhs)
-    assert.are.same("ö", tu.find_keymap("i", "oe").rhs)
-    assert.are.same("ü", tu.find_keymap("i", "ue").rhs)
+    assert.are.same("Ä", tu.find_buf_keymap("i", "Ae").rhs)
+    assert.are.same("Ö", tu.find_buf_keymap("i", "Oe").rhs)
+    assert.are.same("Ü", tu.find_buf_keymap("i", "Ue").rhs)
+    assert.are.same("ä", tu.find_buf_keymap("i", "ae").rhs)
+    assert.are.same("ö", tu.find_buf_keymap("i", "oe").rhs)
+    assert.are.same("ü", tu.find_buf_keymap("i", "ue").rhs)
   end)
 
   it("removes insert mappings when disabled", function()
@@ -35,12 +35,12 @@ describe("umlauts", function()
 
     umlauts.disable_umlaut_mappings()
 
-    assert.is_nil(tu.find_keymap("i", "Ae"))
-    assert.is_nil(tu.find_keymap("i", "Oe"))
-    assert.is_nil(tu.find_keymap("i", "Ue"))
-    assert.is_nil(tu.find_keymap("i", "ae"))
-    assert.is_nil(tu.find_keymap("i", "oe"))
-    assert.is_nil(tu.find_keymap("i", "ue"))
+    assert.is_nil(tu.find_buf_keymap("i", "Ae"))
+    assert.is_nil(tu.find_buf_keymap("i", "Oe"))
+    assert.is_nil(tu.find_buf_keymap("i", "Ue"))
+    assert.is_nil(tu.find_buf_keymap("i", "ae"))
+    assert.is_nil(tu.find_buf_keymap("i", "oe"))
+    assert.is_nil(tu.find_buf_keymap("i", "ue"))
   end)
 
   it("can enable multiple times without crashing", function()
