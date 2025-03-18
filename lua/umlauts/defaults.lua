@@ -2,12 +2,12 @@ return {
   enabled = true,
   pattern = { "*.md", "*.adoc", "*.tex", "*.txt", "*.typ" },
   mappings = {
-    Ae = "Ä",
-    Oe = "Ö",
-    Ue = "Ü",
-    ae = "ä",
-    oe = "ö",
-    ue = "ü",
+    Aee = "Ä",
+    Oee = "Ö",
+    Uee = "Ü",
+    aee = "ä",
+    oee = "ö",
+    uee = "ü",
     sz = "ß",
   },
 }
